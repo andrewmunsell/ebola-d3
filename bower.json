@@ -1,0 +1,20 @@
+{
+  "name": "ebola-d3",
+  "version": "1.0.0",
+  "authors": [
+    "Andrew Munsell <andrew@wizardapps.net>"
+  ],
+  "description": "Interactive, time-lapse visualization of the Ebola outbreak around the world in D3.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.4.12",
+    "topojson": "~1.6.18"
+  }
+}

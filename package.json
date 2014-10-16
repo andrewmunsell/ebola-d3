@@ -1,0 +1,21 @@
+{
+	"name": "ebola-d3",
+
+	"version": "1.0.0",
+	"description": "Interactive, time-lapse visualization of the Ebola outbreak around the world in D3.",
+
+	"scripts": {
+		"postinstall": "./node_modules/.bin/bower install"
+	},
+
+	"author": "Andrew Munsell <andrew@wizardapps.net>",
+	"license": "MIT",
+
+	"devDependencies": {
+		"grunt": "^0.4.5"
+	},
+
+	"dependencies": {
+		"bower": "^1.3.12"
+	}
+}
