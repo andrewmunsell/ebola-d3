@@ -19,7 +19,8 @@ body {
 	font-size: 14px;
 }
 
-html.no-js main.require-js {
+html.no-js main.require-js,
+html.no-svg main.require-js {
 	display: none;
 }
 
@@ -139,6 +140,10 @@ main #map-container {
 	height: 600px;
 
 	position: relative;
+}
+
+main.no-js>div {
+	padding: 24px;
 }
 
 /**
