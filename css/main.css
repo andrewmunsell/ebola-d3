@@ -130,6 +130,15 @@ main #map-container {
 }
 
 /**
+ * Map
+ */
+
+#map-container svg path {
+	fill: #fff;
+	stroke: transparent;
+}
+
+/**
  * Responsive Styles
  */
 
