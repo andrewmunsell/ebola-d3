@@ -14,6 +14,8 @@
     "tests"
   ],
   "dependencies": {
+    "zepto": "~1.1.4",
+    "modernizr": "~2.8.3",
     "d3": "~3.4.12",
     "topojson": "~1.6.18"
   }
