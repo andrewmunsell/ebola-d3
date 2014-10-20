@@ -1,8 +1,16 @@
 'use strict';
 
 define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
+	/**
+	 * Path to the TopoJSON file to use for the map
+	 * @type {String}
+	 */
 	var dataFile = 'data/world-110m.json';
 
+	/**
+	 * Maximum latitude of the map to prevent scrolling past the poles
+	 * @type {Number}
+	 */
 	var maxLatitude = 83;
 
 	/**
@@ -41,6 +49,22 @@ define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
 			.projection(this.projection);
 
 		this.el.call(this.setupZoom());
+	};
+
+	/**
+	 * Set the width of the map
+	 * @param {number} width
+	 */
+	Map.prototype.setWidth = function(width) {
+		this.width = width;
+	};
+
+	/**
+	 * Set the height of the map
+	 * @param  {number} height
+	 */
+	Map.prototype.setHeight = function(height) {
+		this.height = height;
 	};
 
 	/**
