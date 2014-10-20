@@ -51,6 +51,18 @@ aside section {
 	padding: 0 24px;
 }
 
+aside a.back {
+	margin-top: 24px;
+
+	display: block;
+
+	color: #fff;
+
+	font-size: 11px;
+
+	opacity: 0.6;
+}
+
 aside h1 {
 	margin: 0;
 	padding-top: 24px;
