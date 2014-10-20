@@ -17,8 +17,6 @@ body {
 	color: #fff;
 	font-family: "Open Sans", Helvetica, sans-serif;
 	font-size: 14px;
-
-	line-height: 22px;
 }
 
 body.no-js main.require-js {
@@ -80,6 +78,10 @@ aside h2 {
 
 	font-size: 12px;
 	font-weight: 300;
+}
+
+aside p {
+	line-height: 22px;
 }
 
 /**
