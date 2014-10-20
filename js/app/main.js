@@ -5,7 +5,7 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 		var parent = $('#map-container');
 
 		var width = parent.width();
-		var height = 600;
+		var height = parent.height();
 
 		var svg = d3.select('#map-container')
 			.append('svg')
@@ -15,7 +15,7 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 		d3.select(window)
 			.on('resize', function() {
 				var width = parent.width();
-				var height = 600;
+				var height = parent.height();
 
 				svg.attr('width', width);
 				svg.attr('height', height);
