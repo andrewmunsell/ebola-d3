@@ -47,7 +47,8 @@ aside {
 }
 
 aside header,
-aside section {
+aside section,
+aside footer {
 	padding: 0 24px;
 }
 
@@ -106,10 +107,18 @@ aside .statistic h3 small {
 }
 
 aside .statistic .statistic-value {
-	margin-top: 8px;
+	margin: 0;
 
 	font-size: 42px;
 	font-weight: bold;
+}
+
+aside footer {
+	margin-top: 24px;
+
+	font-size: 12px;
+
+	opacity: 0.6;
 }
 
 /**
