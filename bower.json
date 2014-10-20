@@ -5,7 +5,7 @@
     "Andrew Munsell <andrew@wizardapps.net>"
   ],
   "description": "Interactive, time-lapse visualization of the Ebola outbreak around the world in D3.",
-  "license": "MIT",
+  "license": "Proprietary",
   "ignore": [
     "**/.*",
     "node_modules",
