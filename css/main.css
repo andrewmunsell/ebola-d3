@@ -33,7 +33,9 @@ body.no-js main.no-js {
 
 aside {
 	width: 30%;
-	height: 100%;
+	height: 95%;
+
+	padding-bottom: 5%;
 
 	float: left;
 
