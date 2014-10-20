@@ -19,12 +19,12 @@ body {
 	font-size: 14px;
 }
 
-body.no-js main.require-js {
+html.no-js main.require-js {
 	display: none;
 }
 
-body.no-js main.no-js {
-	display: block;
+html.js main.no-js {
+	display: none;
 }
 
 /**
