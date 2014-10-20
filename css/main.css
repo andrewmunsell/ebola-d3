@@ -1,0 +1,149 @@
+/**
+ * Global Page Styles
+ */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background: #3E4147;
+
+	color: #fff;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	font-size: 14px;
+
+	line-height: 22px;
+}
+
+body.no-js main.require-js {
+	display: none;
+}
+
+body.no-js main.no-js {
+	display: block;
+}
+
+/**
+ * Sidebar
+ */
+
+aside {
+	width: 30%;
+	height: 100%;
+
+	float: left;
+
+	background: #2F333B;
+
+	padding-top: 16px;
+
+	font-weight: 300;
+}
+
+aside header,
+aside section {
+	padding: 0 24px;
+}
+
+aside h1 {
+	margin: 0;
+	padding-top: 24px;
+
+	font-size: 24px;
+	letter-spacing: 0.15em;
+
+	text-transform: uppercase;
+}
+
+aside h2 {
+	margin: 0;
+	padding-top: 4px;
+	padding-bottom: 18px;
+
+	font-size: 12px;
+	font-weight: 300;
+}
+
+/**
+ * Statistics
+ */
+
+aside .statistic h3 {
+	margin: 0;
+	padding-top: 16px;
+
+	font-size: 12px;
+	font-weight: bold;
+}
+
+aside .statistic h3 small {
+	font-size: 12px;
+	font-weight: 300;
+
+	opacity: 0.6;
+}
+
+aside .statistic .statistic-value {
+	margin-top: 8px;
+
+	font-size: 42px;
+	font-weight: bold;
+}
+
+/**
+ * Main
+ */
+
+main {
+	width: 70%;
+
+	float: left;
+}
+
+main #map-container {
+	margin: 0;
+
+	width: 100%;
+	height: 600px;
+}
+
+/**
+ * Responsive Styles
+ */
+
+@media(max-width: 600px) {
+	aside {
+		width: 100%;
+		height: auto;
+	}
+
+	main {
+		width: 100%;
+	}
+}
+
+@media(min-width: 601px) and (max-width: 800px) {
+	aside {
+		width: 35%;
+	}
+
+	main {
+		width: 65%;
+	}
+}
+
+@media(min-width: 1024px) {
+	aside {
+		width: 25%;
+	}
+
+	main {
+		width: 75%;
+	}
+}

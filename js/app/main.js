@@ -1,18 +1,24 @@
 'use strict';
 
-define(['require', 'd3'], function(require, d3) {
+define(['require', 'zepto', 'd3'], function(require, $, d3) {
 	require(['./map/map'], function(Map) {
-		var width = 600;
-		var height = 400;
+		var parent = $('#map-container');
 
-		var svg = d3.select('body')
+		var width = parent.width();
+		var height = 600;
+
+		var svg = d3.select('#map-container')
 			.append('svg')
 			.attr('width', width)
 			.attr('height', height);
 
 		d3.select(window)
 			.on('resize', function() {
-				svg.attr('width', window.innerWidth);
+				var width = parent.width();
+				var height = 600;
+
+				svg.attr('width', width);
+				svg.attr('height', height);
 			});
 
 		var map = new Map(svg, width, height);
