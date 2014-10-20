@@ -113,7 +113,10 @@ define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
 			self.el.selectAll('path')
 				.data(topojson.feature(world, world.objects.countries).features)
 				.enter()
-					.append('path');
+					.append('path')
+						.attr('class', function(data) {
+							return 'country feature-' + data.id;
+						});
 
 			self.redraw.call(self);
 		});
