@@ -22,12 +22,14 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 		/**
 		 * Timeline
 		 */
+		var timelineHeight = 18;
+
 		var svgTimeline = d3.select('#timeline-container')
 			.append('svg')
 			.attr('width', width)
-			.attr('height', 48);
+			.attr('height', timelineHeight);
 
-		var timeline = new Timeline(svgTimeline, width, 48);
+		var timeline = new Timeline(svgTimeline, width, timelineHeight);
 		timeline.load();
 
 		/**

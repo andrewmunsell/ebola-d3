@@ -16,13 +16,31 @@ define(['require', 'd3', 'zepto'], function(require, d3, zepto) {
 	 */
 	Timeline.prototype.setWidth = function(width) {
 		this.width = width;
+
+		this.resize();
+	};
+
+	Timeline.prototype.resize = function() {
+		this.backdrop
+			.attr('x', this.width * 0.15)
+			.attr('y', 0)
+			.attr('width', this.width * 0.7)
+			.attr('height', this.height)
+			.attr('rx', this.height / 2)
+			.attr('ry', this.height / 2)
 	};
 
 	/**
 	 * Load the timeline
 	 */
 	Timeline.prototype.load = function() {
-		
+		var self = this;
+
+		this.backdrop = this.el.append('g')
+			.append('rect')
+				.attr('class', 'timeline-backdrop');
+
+		this.resize();
 	};
 
 	return Timeline;

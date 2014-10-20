@@ -166,11 +166,33 @@ main.no-js>div {
 	background: -ms-linear-gradient(top,  rgba(62,65,71,0) 0%,rgba(62,65,71,0) 14%,rgba(62,65,71,1) 89%,rgba(62,65,71,1) 99%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(62,65,71,0) 0%,rgba(62,65,71,0) 14%,rgba(62,65,71,1) 89%,rgba(62,65,71,1) 99%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003e4147', endColorstr='#3e4147',GradientType=0 ); /* IE6-9 */
+
+	pointer-events: none;
 }
 
 #map-container svg path {
 	fill: #fff;
 	stroke: transparent;
+}
+
+/**
+ * Timeline
+ */
+
+#timeline-container {
+	position: relative;
+
+	top: -18px;
+
+	overflow: visible;
+}
+
+#timeline-container svg {
+	overflow: visible;
+}
+
+#timeline-container .timeline-backdrop {
+	fill: #fff;
 }
 
 /**
