@@ -1,0 +1,3 @@
+[submodule "data/ebola"]
+	path = data/ebola
+	url = https://github.com/cmrivers/ebola
