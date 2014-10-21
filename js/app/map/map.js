@@ -134,7 +134,7 @@ define(['require', 'zepto', 'd3', 'topojson'], function(require, $, d3, topojson
 		var self = this;
 
 		d3.json(dataFile, function(error, world) {
-			$('#map-container').addClass('loaded');
+			$('main').addClass('loaded');
 
 			self.el.selectAll('path')
 				.data(topojson.feature(world, world.objects.countries).features)

@@ -148,16 +148,6 @@ main {
 	position: relative;
 }
 
-#map-container>svg {
-	opacity: 0;
-
-	transition: opacity 1.5s ease-in-out;
-}
-
-#map-container.loaded>svg {
-	opacity: 1;
-}
-
 main.no-js>div {
 	padding: 24px;
 }
@@ -166,11 +156,22 @@ main.no-js>div {
  * Map
  */
 
+#map-container>svg {
+	opacity: 0;
+
+	transition: opacity 1.5s ease-in-out;
+}
+
+.loaded #map-container>svg {
+	opacity: 1;
+}
+
 #map-container .map-shadow-bottom {
 	width: 100%;
 	height: 60px;
 
 	position: absolute;
+	z-index: 999;
 
 	bottom: 0;
 
@@ -203,8 +204,20 @@ main.no-js>div {
 	overflow: visible;
 }
 
-#timeline-container svg {
+.loaded #timeline-container>svg {
+	opacity: 1;
+}
+
+#timeline-container>svg {
+	position: absolute;
+	z-index: 9999;
+
 	overflow: visible;
+
+	opacity: 0;
+
+	transition: opacity 1.5s ease-in-out;
+	transition-delay: 0.5s;
 }
 
 #timeline-container .timeline-backdrop {
