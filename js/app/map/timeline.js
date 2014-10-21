@@ -72,11 +72,9 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 			.append('circle')
 				.attr('cx', function(d) {
 					var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
-					return (self.width * 0.15) + (self.width * 0.7 * ratio);
+					return (100 * (0.15 + 0.7 * ratio)) + '%';
 				})
-				.attr('cy', function(d) {
-					return self.height / 2
-				})
+				.attr('cy', this.height / 2)
 				.attr('r', 24)
 				.attr('class', 'timeline-event-outer');
 
@@ -84,11 +82,9 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 			.append('circle')
 				.attr('cx', function(d) {
 					var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
-					return (self.width * 0.15) + (self.width * 0.7 * ratio);
+					return (100 * (0.15 + 0.7 * ratio)) + '%';
 				})
-				.attr('cy', function(d) {
-					return self.height / 2
-				})
+				.attr('cy', this.height / 2)
 				.attr('r', 20)
 				.attr('class', 'timeline-event-inner');
 	};
