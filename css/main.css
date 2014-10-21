@@ -34,15 +34,13 @@ html.js main.no-js {
 
 aside {
 	width: 30%;
-	height: 100%;
+	min-height: 100%;
 
 	float: left;
 
 	background: #2F333B;
 
 	font-weight: 300;
-
-	overflow-y: scroll;
 }
 
 aside header,
@@ -132,11 +130,9 @@ aside footer {
 
 main {
 	width: 70%;
-	height: 100%;
+	min-height: 100%;
 
 	float: left;
-
-	overflow-y: scroll;
 }
 
 #map-container {
