@@ -195,6 +195,18 @@ main.no-js>div {
 	fill: #fff;
 }
 
+#timeline-container .timeline-current-time {
+	fill: #636973;
+}
+
+#timeline-container .timeline-event-outer {
+	fill: #fff;
+}
+
+#timeline-container .timeline-event-inner {
+	fill: #969EAB;
+}
+
 /**
  * Responsive Styles
  */
