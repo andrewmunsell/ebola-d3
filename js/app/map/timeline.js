@@ -77,7 +77,7 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 		var self = this;
 
 		var eventMarker = this.eventContainer
-			.selectAll('g')
+			.selectAll('svg')
 				.data(this.eventData)
 				.enter()
 					.append('svg')
