@@ -59,6 +59,15 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 			.attr('ry', this.height / 2);
 
 		/**
+		 * Current Time Marker
+		 */
+		this.currentMarker
+			.attr('cx', this.width * 0.15 + this.height / 2)
+			.attr('cy', this.height / 2)
+			.attr('r', 8)
+			.attr('class', 'timeline-current-time');
+
+		/**
 		 * Event Markers
 		 */
 
@@ -100,11 +109,7 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 				.attr('class', 'timeline-backdrop');
 
 		this.currentMarker = this.container
-			.append('circle')
-				.attr('cx', this.width * 0.15 + this.height / 2)
-				.attr('cy', this.height / 2)
-				.attr('r', 8)
-				.attr('class', 'timeline-current-time');
+			.append('circle');
 
 		this.eventContainer = this.container
 			.append('g')
