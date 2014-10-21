@@ -210,7 +210,7 @@ main.no-js>div {
 .timeline-event-inner {
 	fill: #969EAB;
 
-	transition: fill 0.25s linear;
+	transition: fill 0.25s ease-out;
 }
 
 .timeline-event:hover .timeline-event-inner {
@@ -221,9 +221,9 @@ main.no-js>div {
 	transform: rotate(45deg);
 }
 
-.timeline-event-line {
+.timeline-event-line,
+.timeline-event-summary-line {
 	stroke: #fff;
-
 	opacity: 0.6;
 }
 
@@ -242,6 +242,31 @@ main.no-js>div {
 
 .timeline-event:hover .timeline-event-name {
 	font-weight: bold;
+}
+
+.timeline-event-summary-line {
+	opacity: 0;
+
+	transition: opacity 0.25s ease-out;
+}
+
+.timeline-event:hover .timeline-event-summary-line {
+	opacity: 0.6;
+}
+
+.timeline-event-summary-value {
+	fill: #fff;
+
+	font-size: 12px;
+
+	opacity: 0;
+
+	transition: opacity 0.25s ease-out;
+	transition-delay: 0.1s;
+}
+
+.timeline-event:hover .timeline-event-summary-value {
+	opacity: 1;
 }
 
 /**

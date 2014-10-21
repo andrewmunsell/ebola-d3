@@ -92,6 +92,7 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 		 */
 		
 		var lineLength = 125;
+		var summaryWidth = 250;
 
 		var lineGroup = eventMarker.append('g')
 			.attr('class', 'timeline-event-line-container');
@@ -114,6 +115,29 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 				.text(function(d) {
 					return d.data.name;
 				});
+
+		var summaryGroup = eventMarker.append('g')
+			.attr('transform', function(d) {
+				var coords = (Math.sqrt(Math.pow(lineLength, 2) / 2));
+				return 'translate(' + coords + ' ' + coords + ')';
+			})
+			.attr('class', 'timeline-event-summary');
+
+		summaryGroup
+			.append('line')
+				.attr('x1', 0)
+				.attr('y1', 0)
+				.attr('x2', summaryWidth / 4)
+				.attr('y2', 0)
+				.attr('class', 'timeline-event-summary-line');
+
+		summaryGroup
+			.append('text')
+				.attr('y', 18)
+				.text(function(d) {
+					return d.data.description;
+				})
+				.attr('class', 'timeline-event-summary-value');
 
 		/**
 		 * Add actual marker
