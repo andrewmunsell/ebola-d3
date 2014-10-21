@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
+define(['require', 'zepto', 'd3', 'topojson'], function(require, $, d3, topojson) {
 	/**
 	 * Path to the TopoJSON file to use for the map
 	 * @type {String}
@@ -134,6 +134,8 @@ define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
 		var self = this;
 
 		d3.json(dataFile, function(error, world) {
+			$('#map-container').addClass('loaded');
+
 			self.el.selectAll('path')
 				.data(topojson.feature(world, world.objects.countries).features)
 				.enter()
