@@ -5,7 +5,7 @@ define(['require', 'd3', 'topojson'], function(require, d3, topojson) {
 	 * Path to the TopoJSON file to use for the map
 	 * @type {String}
 	 */
-	var dataFile = 'data/world-110m.json';
+	var dataFile = 'data/maps/world-110m.json';
 
 	/**
 	 * Maximum latitude of the map to prevent scrolling past the poles
