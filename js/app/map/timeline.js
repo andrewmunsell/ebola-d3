@@ -70,29 +70,65 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 		/**
 		 * Event Markers
 		 */
+		 this.drawEventMarkers();
+	};
+
+	Timeline.prototype.drawEventMarkers = function() {
+		var self = this;
 
 		var eventMarker = this.eventContainer
 			.selectAll('g')
 				.data(this.eventData)
 				.enter()
-					.append('g');
+					.append('svg')
+						.attr('x', function(d) {
+							var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
+							return (100 * (0.15 + 0.7 * ratio)) + '%';
+						})
+						.attr('class', 'timeline-event');
+
+		/**
+		 * Add lines, text, and summary
+		 */
+		
+		var lineLength = 125;
+
+		var lineGroup = eventMarker.append('g')
+			.attr('class', 'timeline-event-line-container');
+		
+		lineGroup
+			.append('line')
+				.attr('x1', 0)
+				.attr('y1', 0)
+				.attr('x2', lineLength)
+				.attr('y2', 0)
+				.attr('stroke-width', 1)
+				.attr('class', 'timeline-event-line');
+		
+		lineGroup
+			.append('text')
+				.attr('x', lineLength)
+				.attr('y', -3)
+				.attr('text-anchor', 'end')
+				.attr('class', 'timeline-event-name')
+				.text(function(d) {
+					return d.data.name;
+				});
+
+		/**
+		 * Add actual marker
+		 */
 
 		eventMarker
 			.append('circle')
-				.attr('cx', function(d) {
-					var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
-					return (100 * (0.15 + 0.7 * ratio)) + '%';
-				})
+				.attr('cx', 0)
 				.attr('cy', this.height / 2)
 				.attr('r', 24)
 				.attr('class', 'timeline-event-outer');
 
 		eventMarker
 			.append('circle')
-				.attr('cx', function(d) {
-					var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
-					return (100 * (0.15 + 0.7 * ratio)) + '%';
-				})
+				.attr('cx', 0)
 				.attr('cy', this.height / 2)
 				.attr('r', 20)
 				.attr('class', 'timeline-event-inner');

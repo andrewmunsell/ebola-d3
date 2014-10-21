@@ -13,8 +13,8 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 
 		var svg = d3.select('#map-container')
 			.append('svg')
-			.attr('width', width)
-			.attr('height', height);
+				.attr('width', width)
+				.attr('height', height);
 
 		var map = new Map(svg, width, height);
 		map.load();	
@@ -26,8 +26,8 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 
 		var svgTimeline = d3.select('#timeline-container')
 			.append('svg')
-			.attr('width', width)
-			.attr('height', timelineHeight);
+				.attr('width', width)
+				.attr('height', timelineHeight);
 
 		var timeline = new Timeline(svgTimeline, width, timelineHeight);
 		timeline.load();
