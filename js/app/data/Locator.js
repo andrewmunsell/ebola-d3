@@ -67,6 +67,14 @@ define(['require', 'underscore'], function(require, _) {
 					]
 				}
 			]
+		},
+
+		{
+			'names': ['SL', 'Sierra Leone'],
+			'coordinates': {
+				'latitude': 8.4494988,
+				'longitude': -11.7868289
+			}
 		}
 	];
 
