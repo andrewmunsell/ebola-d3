@@ -23,6 +23,78 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 			'country': 'LR',
 			'region': 'ZZ',
 			'type': 'cases'
+		},
+
+		'Cases_SierraLeone': {
+			'country': 'SL',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
+		'Cases_Nigeria': {
+			'country': 'NG',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
+		'Cases_Senegal': {
+			'country': 'SN',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
+		'Cases_UnitedStates': {
+			'country': 'US',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
+		'Cases_Spain': {
+			'country': 'ES',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
+		'Deaths_Guinea': {
+			'country': 'GN',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_Liberia': {
+			'country': 'LR',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_SierraLeone': {
+			'country': 'SL',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_Nigeria': {
+			'country': 'NG',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_Senegal': {
+			'country': 'SN',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_UnitedStates': {
+			'country': 'US',
+			'region': 'ZZ',
+			'type': 'deaths'
+		},
+
+		'Deaths_Spain': {
+			'country': 'ES',
+			'region': 'ZZ',
+			'type': 'deaths'
 		}
 	};
 
