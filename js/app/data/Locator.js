@@ -43,9 +43,7 @@ define(['require', 'underscore'], function(require, _) {
 
 		{
 			'names': ['CD', 'DRC', 'Democratic Republic of the Congo'],
-			'coordinates': {
-
-			},
+			'coordinates': null,
 
 			'regions': [
 				{
