@@ -20,7 +20,9 @@ define(['require'], function(require) {
 	 *
 	 * Each time set is identified by its ISO date time stamp. Underneath each time is an ISO 3166-1 
 	 * country code, which contains an 2-letter region code if available. If no region is available
-	 * or known, the identifier "ZZ" is used instead. Unknown countries are not represented in the data set.
+	 * or known, the identifier "ZZ" is used instead. Inside of the region data is the city level data.
+	 * Unknown cities are simply identified as "Unknown". Unknown countries are not represented in the 
+	 * data set.
 	 */
 	var Collector = function() {
 

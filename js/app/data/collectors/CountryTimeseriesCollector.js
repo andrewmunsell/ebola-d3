@@ -157,7 +157,11 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 					data[date][country][region] = {};
 				}
 
-				data[date][country][region][type] = parseInt(row[i], 10);
+				if(typeof(data[date][country][region]['Unknown']) == 'undefined') {
+					data[date][country][region]['Unknown'] = {};
+				}
+
+				data[date][country][region]['Unknown'][type] = parseInt(row[i], 10);
 			}
 		}
 
