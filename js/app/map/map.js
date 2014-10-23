@@ -111,7 +111,7 @@ define(['require', 'zepto', 'd3', 'topojson'], function(require, $, d3, topojson
 			this.lastTranslation = t;
 		}
 
-		this.el.selectAll('path')       // re-project path data
+		this.el.selectAll('path') 
 			.attr('d', this.path);
 	};
 
