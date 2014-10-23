@@ -1,6 +1,12 @@
 'use strict';
 
-define(['require'], function(require) {
+define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepmerge, d3) {
+	/**
+	 * URL of the CSV file containing the data
+	 * @type {String}
+	 */
+	var url = 'data/ebola/country_timeseries.csv';
+
 	/**
 	 * Map of the column name to the country and region codes
 	 * as well as the type of data the number represents
@@ -18,7 +24,7 @@ define(['require'], function(require) {
 			'region': 'ZZ',
 			'type': 'cases'
 		}
-	}
+	};
 
 	/**
 	 * Data collector that parses the country_timeseries.csv file
@@ -34,7 +40,76 @@ define(['require'], function(require) {
 	 * @return {Q.promise}
 	 */
 	CountryTimeseriesCollector.prototype.collect = function(callback) {
-		
+		var self = this;
+
+		d3.csv(url)
+			.row(function(d) {
+				return self.processRow.call(self, d);
+			})
+			.get(function(error, data) {
+				callback(self.postProcessData.call(self, data));
+			});
+	};
+
+	/**
+	 * Process the specified row's data
+	 * @param  {Object} row Object containing the row's values
+	 */
+	CountryTimeseriesCollector.prototype.processRow = function(row) {
+		var data = {};
+		var date = moment(row['Date'], 'M-D-YYYY');
+		if(date.get('year') < 100) {
+			date = moment(row['Date'], 'M-D-YY');
+		}
+
+		date = date.toISOString();
+
+		data[date] = {};
+
+		for(var i in countries) {
+			if(countries.hasOwnProperty(i) && row.hasOwnProperty(i)) {
+				var country = countries[i].country;
+				var region = countries[i].region;
+				var type = countries[i].type;
+
+				if(row[i].trim() == '' || parseInt(row[i], 10) == NaN) {
+					// The row is not a number, so just skip it.
+					continue;
+				}
+
+				if(typeof(data[date][country]) == 'undefined') {
+					data[date][country] = {};
+				}
+
+				if(typeof(data[date][country][region]) == 'undefined') {
+					data[date][country][region] = {};
+				}
+
+				data[date][country][region][type] = parseInt(row[i], 10);
+			}
+		}
+
+		return data;
+	};
+
+	/**
+	 * Post process the CSV to consolidate the entire set of data into an object,
+	 * instead of an array of objects.
+	 * @param  {array} data Data
+	 * @return {object}     An object containing the post processed data
+	 */
+	CountryTimeseriesCollector.prototype.postProcessData = function(data) {
+		var processedData = {};
+
+		for(var i = 0; i < data.length; i++) {
+			for(var date in data[i]) {
+				if(data[i].hasOwnProperty(date)) {
+					processedData = deepmerge(processedData, data[i]);
+				}
+			}
+		}
+
+		return processedData;
 	};
 
 	return CountryTimeseriesCollector;
