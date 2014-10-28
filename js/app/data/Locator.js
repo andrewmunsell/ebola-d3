@@ -9,8 +9,8 @@ define(['require', 'underscore'], function(require, _) {
 		{
 			'names': ['ES', 'Spain'],
 			'coordinates': {
-				'latitude': -3.74922,
-          		'longitude': 40.46366700000001
+				'longitude': -3.74922,
+          		'latitude': 40.46366700000001
 			},
 
 			'regions': []
@@ -19,8 +19,8 @@ define(['require', 'underscore'], function(require, _) {
 		{
 			'names': ['US', 'USA', 'United States', 'United States of America'],
 			'coordinates': {
-				'latitude': -95.712891,
-          		'longitude': 37.09024
+				'longitude': -95.712891,
+          		'latitude': 37.09024
 			},
 
 			'regions': [
