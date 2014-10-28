@@ -124,6 +124,12 @@ define(['require', 'underscore'], function(require, _) {
 	 * @param  {string} region ISO code or name of the region
 	 */
 	Locator.prototype.locateRegion = function(regions, region, city) {
+		if(region == 'ZZ' || region == null) {
+			// If the region is unknown we obviously don't have a specific set of
+			// coordinates for it, so we don't even bother looping over the regions
+			return null;
+		}
+
 		var coordinates = null;
 
 		for (var i = regions.length - 1; i >= 0; i--) {
@@ -152,6 +158,12 @@ define(['require', 'underscore'], function(require, _) {
 	 * @param  {string} city Name of the city
 	 */
 	Locator.prototype.locateCity = function(cities, city) {
+		if(city.toLowerCase() == 'unknown' || city == null) {
+			// If the city is unknown we obviously don't have a specific set of
+			// coordinates for it, so we don't even bother looping over the cities
+			return null;
+		}
+
 		for (var i = cities.length - 1; i >= 0; i--) {
 			var cityIndex = _.indexOf(cities[i].names, city);
 			if(cityIndex >= 0) {
