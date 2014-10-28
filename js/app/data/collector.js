@@ -1,6 +1,10 @@
 'use strict';
 
-define(['require'], function(require) {
+define(['require', './Locator'], function(require, Locator) {
+	var collectors = [
+		'./collectors/CountryTimeseriesCollector'
+	];
+
 	/**
 	 * Constructor for the Collector, which aggregates the different data collectors
 	 * into a single data set that can be presented.
@@ -25,7 +29,65 @@ define(['require'], function(require) {
 	 * data set.
 	 */
 	var Collector = function() {
+		this.locator = new Locator();
+	};
 
+	/**
+	 * Collect data from all of the collectors and resolve the promise with the aggregated
+	 * values.
+	 */
+	Collector.prototype.collect = function(callback) {
+		var self = this;
+
+		require(collectors, function() {
+			var requiredResults = arguments.length;
+
+			var results = [];
+			var currentResults = 0;
+
+			var finishPiece = function(result) {
+				results.push(result);
+
+				if(results.length == requiredResults) {
+					self.processCollectors.call(self, results, callback);
+				}
+			}
+
+			for(var i = 0; i < arguments.length; i++) {
+				var collector = new (arguments[i])();
+				collector.collect(finishPiece);
+			}
+		});
+	};
+
+	/**
+	 * Process the data from the collectors
+	 * @param  {array}   results   Results from each collector to aggregate into a single dataset
+	 * @param  {Function} callback Callback to invoke when the results are aggregated
+	 */
+	Collector.prototype.processCollectors = function(results, callback) {
+		if(typeof(callback) != 'function') {
+			throw new Error('The specified callback is not a function.');
+		}
+
+		var data = {};
+
+		for(var i = 0; i < results.length; i++) {
+			var result = results[i];
+
+			for(var d in result) {
+				if(result.hasOwnProperty(d)) {
+					if(data.hasOwnProperty(d)) {
+						// TODO: Merge the dataset into the current collected
+						// data.
+					} else {
+						data[d] = result[d];
+					}
+				}
+			}
+		}
+
+		callback(data);
 	};
 
 	return Collector;
