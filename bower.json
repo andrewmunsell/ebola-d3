@@ -20,6 +20,7 @@
     "topojson": "~1.6.18",
     "moment": "~2.8.3",
     "underscore": "~1.7.0",
-    "deepmerge": "~0.2.9"
+    "deepmerge": "~0.2.9",
+    "emitter": "component/emitter#~1.1.3"
   }
 }
