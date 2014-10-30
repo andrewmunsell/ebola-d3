@@ -196,6 +196,7 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		this.redraw();
 
 		this.currentMarker.call(this.initDrag());
+		this.setDate(this.currentDate);
 	};
 
 	/**

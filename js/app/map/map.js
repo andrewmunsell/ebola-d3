@@ -379,8 +379,6 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	 */
 	Map.prototype.setDate = function(date) {
 		currentDate = date;
-
-		this.redraw();
 	};
 
 	return Map;
