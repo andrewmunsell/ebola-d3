@@ -61,6 +61,9 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 
 		this.calculateTimelineBounds();
 
+		var p = (this.currentDate.diff(this.start)) / (this.end.diff(this.start));
+		this.currentMarkerPosition = this.minimumCurrentMarkerPosition + p * (this.maximumCurrentMarkerPosition - this.minimumCurrentMarkerPosition);
+
 		/**
 		 * Backdrop
 		 */
@@ -203,14 +206,14 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 
 		return d3.behavior.drag()
 			.on("drag", function(d) {
-				self.currentMarkerPosition = d3.event.x;
-				if(self.currentMarkerPosition < self.minimumCurrentMarkerPosition) {
-					self.currentMarkerPosition = self.minimumCurrentMarkerPosition;
-				} else if(self.currentMarkerPosition > self.maximumCurrentMarkerPosition) {
-					self.currentMarkerPosition = self.maximumCurrentMarkerPosition;
+				var markerPosition = d3.event.x;
+				if(markerPosition < self.minimumCurrentMarkerPosition) {
+					markerPosition = self.minimumCurrentMarkerPosition;
+				} else if(markerPosition > self.maximumCurrentMarkerPosition) {
+					markerPosition = self.maximumCurrentMarkerPosition;
 				}
 
-				var p = (self.currentMarkerPosition - self.minimumCurrentMarkerPosition) / (self.maximumCurrentMarkerPosition - self.minimumCurrentMarkerPosition);
+				var p = (markerPosition - self.minimumCurrentMarkerPosition) / (self.maximumCurrentMarkerPosition - self.minimumCurrentMarkerPosition);
 				var pDiff = self.end.diff(self.start) * p;
 
 				self.setDate.call(self, moment(self.start).add(pDiff, 'milliseconds'));
