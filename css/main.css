@@ -252,7 +252,8 @@ main.no-js>div {
 	transition: fill 0.25s ease-out;
 }
 
-.timeline-event:hover .timeline-event-inner {
+.timeline-event:hover .timeline-event-inner,
+.timeline-event.current .timeline-event-inner {
 	fill: #BFC9D9;
 }
 
@@ -279,7 +280,8 @@ main.no-js>div {
 	transition: font-weight 0.1s linear;
 }
 
-.timeline-event:hover .timeline-event-name {
+.timeline-event:hover .timeline-event-name,
+.timeline-event.current .timeline-event-name {
 	font-weight: bold;
 }
 
@@ -289,7 +291,8 @@ main.no-js>div {
 	transition: opacity 0.25s ease-out;
 }
 
-.timeline-event:hover .timeline-event-summary-line {
+.timeline-event:hover .timeline-event-summary-line,
+.timeline-event.current .timeline-event-summary-line {
 	opacity: 0.6;
 }
 
@@ -304,7 +307,8 @@ main.no-js>div {
 	transition-delay: 0.1s;
 }
 
-.timeline-event:hover .timeline-event-summary-value {
+.timeline-event:hover .timeline-event-summary-value,
+.timeline-event.current .timeline-event-summary-value {
 	opacity: 1;
 }
 
