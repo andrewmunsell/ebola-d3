@@ -15,8 +15,10 @@ define(['require', './Locator'], function(require, Locator) {
 	 * 		"2014-10-21T21:44:00Z": {
 	 * 			"US": {
 	 * 				"TX": {
-	 * 					"cases": 3,
-	 * 					"deaths": 1	
+	 * 					"Dallas": {
+	 * 						"cases": 3,
+	 * 						"deaths": 1	
+	 * 					}
 	 * 				}
 	 * 			}
 	 * 		}
@@ -27,6 +29,9 @@ define(['require', './Locator'], function(require, Locator) {
 	 * or known, the identifier "ZZ" is used instead. Inside of the region data is the city level data.
 	 * Unknown cities are simply identified as "Unknown". Unknown countries are not represented in the 
 	 * data set.
+	 *
+	 * If a dataset has only county/state/subregion data, then the collector should aggregate the values
+	 * into the ZZ/Unknown subregion-city to provide an overview of the country's cases/deaths.
 	 */
 	var Collector = function() {
 		this.locator = new Locator();
