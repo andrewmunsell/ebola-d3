@@ -2,6 +2,12 @@
 
 define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], function(require, EventEmitter, d3, d3textwrap, zepto, moment) {
 	/**
+	 * URL for the file containing the events to plot on the map
+	 * @type {String}
+	 */
+	var eventsUrl = './data/events.json';
+
+	/**
 	 * Constructor for the timeline that accepts the element to use
 	 */
 	var Timeline = function(el, width, height) {
@@ -211,6 +217,23 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 		this.currentMarker.call(this.initDrag());
 		this.setDate(this.currentDate);
+
+		this.loadEvents();
+	};
+
+	/**
+	 * Load events from the JSON file
+	 */
+	Timeline.prototype.loadEvents = function() {
+		var self = this;
+
+		d3.json(eventsUrl, function(err, json) {
+			for(var i = 0; i < json.length; i++) {
+				self.addEvent(moment(json[i].date), json[i].data);
+			}
+
+			self.redraw.call(self);
+		});
 	};
 
 	/**
