@@ -238,6 +238,10 @@ main.no-js>div {
  * Timeline - Event Markers
  */
 
+.timeline-event {
+	overflow: visible;
+}
+
 .timeline-event-outer {
 	fill: #fff;
 }
