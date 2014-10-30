@@ -332,10 +332,6 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				}
 
 				var c = self.projection([d.coordinates.longitude, d.coordinates.latitude]);
-				if(isNaN(c[0]) || isNaN(c[1])) {
-					return null;
-				}
-				
 				return 'translate(' + c + ')';
 			})
 	};
