@@ -75,6 +75,38 @@ define(['require', 'underscore'], function(require, _) {
 				'latitude': 8.4494988,
 				'longitude': -11.7868289
 			}
+		},
+
+		{
+			'names': ['GN', 'Guinea'],
+			'coordinates': {
+				'latitude': 11.0346436,
+				'longitude': -11.3580295
+			}
+		},
+
+		{
+			'names': ['NG', 'Nigeria'],
+			'coordinates': {
+				'latitude': 9.077751,
+				'longitude': 8.6774567
+			}
+		},
+
+		{
+			'names': ['SN', 'Senegal'],
+			'coordinates': {
+				'latitude': 14.5,
+				'longitude': -14.4392276
+			}
+		},
+
+		{
+			'names': ['ML', 'Mali'],
+			'coordinates': {
+				'latitude': 18.2606722,
+				'longitude': -1.9655477
+			}
 		}
 	];
 
