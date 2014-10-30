@@ -20,6 +20,24 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	var locator = new Locator();
 
 	/**
+	 * Minimum cases and deaths for interpolation of point sizes
+	 * @type {Object}
+	 */
+	var minimums = {
+		cases: 0,
+		deaths: 0
+	};
+
+	/**
+	 * Maximum cases and deaths for interpolation of point sizes
+	 * @type {Object}
+	 */
+	var maximums = {
+		cases: 0,
+		deaths: 0
+	};
+
+	/**
 	 * Initialize a new map with the specified element. 
 	 * 
 	 * @url http://bl.ocks.org/patricksurry/6621971 Map panning and zooming functionality
@@ -214,6 +232,18 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				};
 
 				processedData[code]['data'][date] = data;
+			}
+
+			if(typeof(data.cases) == 'number' && data.cases < minimums.cases) {
+				minimums.cases = data.cases;
+			} else if(typeof(data.cases) == 'number' && data.cases > maximums.cases) {
+				maximums.cases = data.cases;
+			}
+
+			if(typeof(data.deaths) == 'number' && data.deaths < minimums.deaths) {
+				minimums.deaths = data.deaths;
+			} else if(typeof(data.deaths) == 'number' && data.deaths > maximums.deaths) {
+				maximums.deaths = data.deaths;
 			}
 		};
 
