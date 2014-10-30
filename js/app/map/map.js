@@ -347,6 +347,10 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 					return null;
 				}
 
+				if(processedData.cases == 0) {
+					return 0;
+				}
+
 				return p * (maxPointSize - minPointSize) + minPointSize;
 			});
 	};
