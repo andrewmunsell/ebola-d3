@@ -20,6 +20,12 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	var locator = new Locator();
 
 	/**
+	 * Current date the map is displaying data for
+	 * @type {moment}
+	 */
+	var currentDate = moment();
+
+	/**
 	 * Minimum cases and deaths for interpolation of point sizes
 	 * @type {Object}
 	 */
@@ -320,6 +326,15 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				
 				return 'translate(' + c + ')';
 			})
+	};
+
+	/**
+	 * Set the current date of the map
+	 */
+	Map.prototype.setDate = function(date) {
+		currentDate = date;
+
+		this.redraw();
 	};
 
 	return Map;

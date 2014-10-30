@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment) {
+define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, EventEmitter, d3, zepto, moment) {
 	/**
 	 * Constructor for the timeline that accepts the element to use
 	 */
@@ -12,7 +12,11 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 		this.start = moment().subtract(1, 'year');
 		this.end = moment();
 
+		this.currentDate = moment().subtract(1, 'year');
+
 		this.eventData = [];
+
+		this.emitter = new EventEmitter();
 	};
 
 	/**
@@ -176,6 +180,16 @@ define(['require', 'd3', 'zepto', 'moment'], function(require, d3, zepto, moment
 				.attr('class', 'timeline-events');
 
 		this.redraw();
+	};
+
+	/**
+	 * Set the current date
+	 * @param {moment} date
+	 */
+	Map.prototype.setDate = function(date) {
+		this.currentDate = date;
+
+		this.emitter.emitEvent('dateChanged', [date]);
 	};
 
 	return Timeline;
