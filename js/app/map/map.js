@@ -334,6 +334,40 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				var c = self.projection([d.coordinates.longitude, d.coordinates.latitude]);
 				return 'translate(' + c + ')';
 			})
+			.transition()
+			.attr('r', function(d) {
+				var processedData = self._dataForCurrentTime.call(self, d);
+				if(processedData == null) {
+					return null;
+				}
+
+				var p = processedData.cases / (maximums.cases - minimums.cases);
+
+				if(isNaN(processedData.cases) || processedData.cases == null) {
+					return null;
+				}
+
+				return p * (maxPointSize - minPointSize) + minPointSize;
+			});
+	};
+
+	/**
+	 * Get the data point for the current time from the dataset
+	 * @param  {object} d Dataset including all times
+	 * @return {object}   New dataset with the data property set to
+	 *                    the datapoint at the current date.
+	 */
+	Map.prototype._dataForCurrentTime = function(d) {
+		var checkpoint = null;
+		for(var i in d.data) {
+			if(d.data.hasOwnProperty(i)) {
+				var point = d.data[i];
+
+				if(currentDate.diff(moment(i)) >= 0) {
+					return d.data[i];
+				}
+			}
+		}
 	};
 
 	/**
