@@ -280,7 +280,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 		this.el.selectAll('circle')
 			.attr('transform', function(d) {
 				if(d.coordinates == null) {
-					return null;
+					return 'translate(-1000, -1000)';
 				}
 
 				var c = self.projection([d.coordinates.longitude, d.coordinates.latitude]);
