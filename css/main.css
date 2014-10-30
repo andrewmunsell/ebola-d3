@@ -296,7 +296,7 @@ main.no-js>div {
 	opacity: 0.6;
 }
 
-.timeline-event-summary-value {
+.timeline-event-summary-value-group {
 	fill: #fff;
 
 	font-size: 12px;
@@ -307,8 +307,8 @@ main.no-js>div {
 	transition-delay: 0.1s;
 }
 
-.timeline-event:hover .timeline-event-summary-value,
-.timeline-event.current .timeline-event-summary-value {
+.timeline-event:hover .timeline-event-summary-value-group,
+.timeline-event.current .timeline-event-summary-value-group {
 	opacity: 1;
 }
 

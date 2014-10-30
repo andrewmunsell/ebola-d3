@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, EventEmitter, d3, zepto, moment) {
+define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], function(require, EventEmitter, d3, d3textwrap, zepto, moment) {
 	/**
 	 * Constructor for the timeline that accepts the element to use
 	 */
@@ -50,7 +50,6 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 			time: time,
 			data: data
 		});
-		this.redraw();
 	};
 
 	/**
@@ -91,6 +90,9 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		 this.drawEventMarkers();
 	};
 
+	/**
+	 * Draw the timeline event markers
+	 */
 	Timeline.prototype.drawEventMarkers = function() {
 		var self = this;
 
@@ -101,6 +103,7 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 					.append('svg')
 						.attr('x', function(d) {
 							var ratio = (d.time.unix() - self.start.unix()) / (self.end.unix() - self.start.unix());
+
 							return (100 * (0.15 + 0.7 * ratio)) + '%';
 						})
 						.attr('class', 'timeline-event');
@@ -109,8 +112,8 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		 * Add lines, text, and summary
 		 */
 		
-		var lineLength = 125;
-		var summaryWidth = 250;
+		var lineLength = 200;
+		var summaryWidth = 300;
 
 		var lineGroup = eventMarker.append('g')
 			.attr('class', 'timeline-event-line-container');
@@ -150,12 +153,23 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 				.attr('class', 'timeline-event-summary-line');
 
 		summaryGroup
-			.append('text')
-				.attr('y', 18)
-				.text(function(d) {
-					return d.data.description;
-				})
-				.attr('class', 'timeline-event-summary-value');
+			.append('g')
+				.attr('class', 'timeline-event-summary-value-group')
+					.append('text')
+						.attr('class', 'timeline-event-summary-value')
+						.text(function(d) {
+							return d.data.description;
+						});
+
+		setTimeout(function() {
+			d3.select('.timeline-event-summary-value')
+				.textwrap({
+					x: 0,
+					y: 4,
+					width: summaryWidth,
+					height: 400
+				});
+		}, 0);
 
 		/**
 		 * Add actual marker
@@ -186,12 +200,12 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 			.append('rect')
 				.attr('class', 'timeline-backdrop');
 
-		this.currentMarker = this.container
-			.append('circle');
-
 		this.eventContainer = this.container
 			.append('g')
 				.attr('class', 'timeline-events');
+
+		this.currentMarker = this.container
+			.append('circle');
 
 		this.redraw();
 
