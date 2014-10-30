@@ -188,6 +188,16 @@ main.no-js>div {
 	stroke: transparent;
 }
 
+#map-container .ping {
+	opacity: 0;
+
+	transition: opacity 1.8s ease-in-out;
+}
+
+.loaded #map-container .ping {
+	opacity: 1;
+}
+
 /**
  * Timeline
  */
