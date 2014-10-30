@@ -32,7 +32,9 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 		var timeline = new Timeline(svgTimeline, width, timelineHeight);
 		timeline.load();
 
-		timeline.emitter.addListener('dateChanged', map.setDate);
+		timeline.emitter.addListener('dateChanged', function(d) {
+			map.setDate.call(map, d);
+		});
 
 		d3.select(window)
 			.on('resize', function() {
