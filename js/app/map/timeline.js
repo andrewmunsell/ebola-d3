@@ -210,6 +210,11 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 					self.currentMarkerPosition = self.maximumCurrentMarkerPosition;
 				}
 
+				var p = (self.currentMarkerPosition - self.minimumCurrentMarkerPosition) / (self.maximumCurrentMarkerPosition - self.minimumCurrentMarkerPosition);
+				var pDiff = self.end.diff(self.start) * p;
+
+				self.setDate.call(self, moment(self.start).add(pDiff, 'milliseconds'));
+
 				self.redraw.call(self);
 			});
 	};
@@ -218,7 +223,7 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 	 * Set the current date
 	 * @param {moment} date
 	 */
-	Map.prototype.setDate = function(date) {
+	Timeline.prototype.setDate = function(date) {
 		this.currentDate = date;
 
 		this.emitter.emitEvent('dateChanged', [date]);
