@@ -9,10 +9,14 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		this.width = width;
 		this.height = height;
 
+		this.calculateTimelineBounds();
+
 		this.start = moment().subtract(1, 'year');
 		this.end = moment();
 
 		this.currentDate = moment().subtract(1, 'year');
+
+		this.currentMarkerPosition = this.minimumCurrentMarkerPosition;
 
 		this.eventData = [];
 
@@ -27,6 +31,11 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		this.width = width;
 
 		this.redraw();
+	};
+
+	Timeline.prototype.calculateTimelineBounds = function() {
+		this.minimumCurrentMarkerPosition = this.width * 0.15 + this.height / 2;
+		this.maximumCurrentMarkerPosition = this.width - (this.width * 0.15 + this.height / 2);
 	};
 
 	/**
@@ -50,6 +59,8 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 	Timeline.prototype.redraw = function() {
 		var self = this;
 
+		this.calculateTimelineBounds();
+
 		/**
 		 * Backdrop
 		 */
@@ -66,7 +77,7 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 		 * Current Time Marker
 		 */
 		this.currentMarker
-			.attr('cx', this.width * 0.15 + this.height / 2)
+			.attr('cx', this.currentMarkerPosition)
 			.attr('cy', this.height / 2)
 			.attr('r', 8)
 			.attr('class', 'timeline-current-time');
@@ -180,6 +191,27 @@ define(['require', 'eventEmitter', 'd3', 'zepto', 'moment'], function(require, E
 				.attr('class', 'timeline-events');
 
 		this.redraw();
+
+		this.currentMarker.call(this.initDrag());
+	};
+
+	/**
+	 * Initialize the drag behavior of the timeline
+	 */
+	Timeline.prototype.initDrag = function() {
+		var self = this;
+
+		return d3.behavior.drag()
+			.on("drag", function(d) {
+				self.currentMarkerPosition = d3.event.x;
+				if(self.currentMarkerPosition < self.minimumCurrentMarkerPosition) {
+					self.currentMarkerPosition = self.minimumCurrentMarkerPosition;
+				} else if(self.currentMarkerPosition > self.maximumCurrentMarkerPosition) {
+					self.currentMarkerPosition = self.maximumCurrentMarkerPosition;
+				}
+
+				self.redraw.call(self);
+			});
 	};
 
 	/**
