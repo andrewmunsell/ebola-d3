@@ -212,7 +212,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				.append('circle')
 					.attr('r', 5)
 					.attr('class', function(d) {
-						return 'ping ' + d.code;
+						return 'ping ping-' + d.code;
 					});
 
 		this.plotPoints(arrayData);
