@@ -14,6 +14,18 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	var maxLatitude = 83;
 
 	/**
+	 * Minimum size of a point in pixels
+	 * @type {Number}
+	 */
+	var minPointSize = 4;
+
+	/**
+	 * Maximum size of a point in pixels
+	 * @type {Number}
+	 */
+	var maxPointSize = 18;
+
+	/**
 	 * Locator instance for the map
 	 * @type {Locator}
 	 */
