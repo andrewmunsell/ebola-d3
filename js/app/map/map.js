@@ -338,13 +338,13 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 			.attr('r', function(d) {
 				var processedData = self._dataForCurrentTime.call(self, d);
 				if(processedData == null) {
-					return null;
+					return 0;
 				}
 
 				var p = processedData.cases / (maximums.cases - minimums.cases);
 
 				if(isNaN(processedData.cases) || processedData.cases == null) {
-					return null;
+					return 0;
 				}
 
 				if(processedData.cases == 0) {
@@ -363,15 +363,34 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	 */
 	Map.prototype._dataForCurrentTime = function(d) {
 		var checkpoint = null;
+
+		var cases = 0;
+		var deaths = 0;
+
 		for(var i in d.data) {
 			if(d.data.hasOwnProperty(i)) {
 				var point = d.data[i];
 
 				if(currentDate.diff(moment(i)) >= 0) {
-					return d.data[i];
+					if(d.data[i].cases) {
+						cases = d.data[i].cases;
+					}
+
+					if(d.data[i].deaths) {
+						deaths = d.data[i].deaths;
+					}
+				}
+
+				if(cases != 0 && deaths != 0) {
+					break;
 				}
 			}
 		}
+
+		return {
+			cases: cases,
+			deaths: deaths
+		};
 	};
 
 	/**
