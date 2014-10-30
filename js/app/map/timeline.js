@@ -17,10 +17,10 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 		this.calculateTimelineBounds();
 
-		this.start = moment().subtract(1, 'year');
+		this.start = moment('2014-03-01');
 		this.end = moment();
 
-		this.currentDate = moment().subtract(1, 'year');
+		this.currentDate = moment('2014-03-01');
 
 		this.currentMarkerPosition = this.minimumCurrentMarkerPosition;
 
