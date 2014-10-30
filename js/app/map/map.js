@@ -123,7 +123,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 	 * Redraw the map
 	 */
 	Map.prototype.redraw = function() {
-		if (d3.event) { 
+		if (d3.event && d3.event.translate && d3.event.scale) { 
 			var scale = d3.event.scale,
 			t = d3.event.translate;
 
