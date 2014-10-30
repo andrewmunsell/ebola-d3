@@ -10,7 +10,8 @@ requirejs.config({
 		moment: '../bower_components/moment/moment',
 		underscore: '../bower_components/underscore/underscore',
 		d3: '../bower_components/d3/d3',
-		topojson: '../bower_components/topojson/topojson'
+		topojson: '../bower_components/topojson/topojson',
+		eventEmitter: '../bower_components/eventEmitter/EventEmitter'
 	},
 
 	shim: {
