@@ -55,6 +55,12 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 			'type': 'cases'
 		},
 
+		'Cases_Mali': {
+			'country': 'ML',
+			'region': 'ZZ',
+			'type': 'cases'
+		},
+
 		'Deaths_Guinea': {
 			'country': 'GN',
 			'region': 'ZZ',
@@ -95,6 +101,12 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 			'country': 'ES',
 			'region': 'ZZ',
 			'type': 'deaths'
+		},
+
+		'Deaths_Mali': {
+			'country': 'ML',
+			'region': 'ZZ',
+			'type': 'deaths'
 		}
 	};
 
@@ -119,6 +131,10 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 				return self.processRow.call(self, d);
 			})
 			.get(function(error, data) {
+				if(error) {
+					throw error;
+				}
+
 				callback(self.postProcessData.call(self, data));
 			});
 	};
@@ -144,7 +160,7 @@ define(['require', 'moment', 'deepmerge', 'd3'], function(require, moment, deepm
 				var region = countries[i].region;
 				var type = countries[i].type;
 
-				if(row[i].trim() == '' || parseInt(row[i], 10) == NaN) {
+				if(!row[i] || row[i].trim() == '' || parseInt(row[i], 10) == NaN) {
 					// The row is not a number, so just skip it.
 					continue;
 				}
