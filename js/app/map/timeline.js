@@ -168,13 +168,15 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 						});
 
 		setTimeout(function() {
-			d3.select('.timeline-event-summary-value')
-				.textwrap({
-					x: 0,
-					y: 4,
-					width: summaryWidth,
-					height: 400
-				});
+			try {
+				d3.select('.timeline-event-summary-value')
+					.textwrap({
+						x: 0,
+						y: 4,
+						width: summaryWidth,
+						height: 400
+					});
+			} catch(e) { }
 		}, 0);
 
 		/**
