@@ -66,6 +66,8 @@ define(['require', 'underscore'], function(require, _) {
 			'regions': [
 				{
 					'names': ['ZZ'],
+					'coordinates': null,
+
 					'cities': [
 						{
 							'names': ['Lokolia'],
@@ -80,6 +82,31 @@ define(['require', 'underscore'], function(require, _) {
 							'coordinates': {
 								'latitude': -0.800,
 								'longitude': 20.550
+							}
+						}
+					]
+				}
+			]
+		},
+
+		{
+			'names': ['LR', 'Liberia'],
+			'coordinates': {
+				'latitude': 6.3740379,
+				'longitude': -9.3377105
+			},
+
+			'regions': [
+				{
+					'names': ['ZZ'],
+					'coordinates': null,
+
+					'cities': [
+						{
+							'names': ['Bomi County', 'Bomi'],
+							'coordinates': {
+								'latitude': 6.725008,
+								'longitude': -10.7842821
 							}
 						}
 					]
