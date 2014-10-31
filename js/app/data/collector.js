@@ -1,9 +1,9 @@
 'use strict';
 
-define(['require', './Locator'], function(require, Locator) {
+define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locator) {
 	var collectors = [
-		'./collectors/USATimeseriesCollector',
-		'./collectors/CountryTimeseriesCollector'
+		'./collectors/CountryTimeseriesCollector',
+		'./collectors/USATimeseriesCollector'
 	];
 
 	/**
@@ -51,17 +51,20 @@ define(['require', './Locator'], function(require, Locator) {
 			var results = [];
 			var currentResults = 0;
 
-			var finishPiece = function(result) {
-				results.push(result);
+			var finishPiece = function(i) {
+				return function(result) {
+					results[i] = result;
+					currentResults++;
 
-				if(results.length == requiredResults) {
-					self.processCollectors.call(self, results, callback);
+					if(currentResults == requiredResults) {
+						self.processCollectors.call(self, results, callback);
+					}
 				}
-			}
+			};
 
 			for(var i = 0; i < arguments.length; i++) {
 				var collector = new (arguments[i])();
-				collector.collect(finishPiece);
+				collector.collect(finishPiece(i));
 			}
 		});
 	};
@@ -84,8 +87,7 @@ define(['require', './Locator'], function(require, Locator) {
 			for(var d in result) {
 				if(result.hasOwnProperty(d)) {
 					if(data.hasOwnProperty(d)) {
-						// TODO: Merge the dataset into the current collected
-						// data.
+						data[d] = deepmerge(data[d], result[d]);
 					} else {
 						data[d] = result[d];
 					}
