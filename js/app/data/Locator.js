@@ -37,6 +37,21 @@ define(['require', 'underscore'], function(require, _) {
 							}
 						}
 					]
+				},
+
+				{
+					'names': ['NY', 'New York'],
+					'coordinates': null,
+
+					'cities': [
+						{
+							'names': ['New York City'],
+							'coordinates': {
+								'latitude': 40.762734,
+								'longitude': -73.9634123
+							}
+						}
+					]
 				}
 			]
 		},
