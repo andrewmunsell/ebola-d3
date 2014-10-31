@@ -4,7 +4,8 @@ define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locat
 	var collectors = [
 		'./collectors/CountryTimeseriesCollector',
 		'./collectors/USATimeseriesCollector',
-		'./collectors/DRCCollector'
+		'./collectors/DRCCollector',
+		'./collectors/LiberiaCollector'
 	];
 
 	/**
