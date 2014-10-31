@@ -32,8 +32,8 @@ define(['require', 'underscore'], function(require, _) {
 						{
 							'names': ['Dallas'],
 							'coordinates': {
-								'latitude': -96.80045109999999,
-          						'longitude': 32.7801399
+								'longitude': -96.80045109999999,
+          						'latitude': 32.7801399
 							}
 						}
 					]
