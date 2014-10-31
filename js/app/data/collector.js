@@ -2,6 +2,7 @@
 
 define(['require', './Locator'], function(require, Locator) {
 	var collectors = [
+		'./collectors/USATimeseriesCollector',
 		'./collectors/CountryTimeseriesCollector'
 	];
 
