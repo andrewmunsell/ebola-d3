@@ -283,9 +283,14 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 									if(region.hasOwnProperty(city)) {
 										var point = region[city];
 
-										// Check and see if this is the country level data
+										// Check what level data this is an properly
+										// put it into the processed data.
 										if(r == 'ZZ' && city.toLowerCase() == 'unknown') {
 											putData(c, 'country', d, point);
+										} else if(r != 'ZZ' && city.toLowerCase() == 'unknown') {
+											putData([c, r].join('.'), 'subregion', d, point);
+										} else {
+											putData([c, r, city].join('.'), 'city', d, point);
 										}
 									}
 								}
