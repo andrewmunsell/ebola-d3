@@ -174,12 +174,6 @@ define(['require', 'underscore'], function(require, _) {
 	 * @param  {string} region ISO code or name of the region
 	 */
 	Locator.prototype.locateRegion = function(regions, region, city) {
-		if(region == 'ZZ' || region == null) {
-			// If the region is unknown we obviously don't have a specific set of
-			// coordinates for it, so we don't even bother looping over the regions
-			return null;
-		}
-
 		var coordinates = null;
 
 		for (var i = regions.length - 1; i >= 0; i--) {
