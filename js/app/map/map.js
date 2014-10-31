@@ -85,6 +85,8 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 		this.scale = this.width / (bounds[1][0] - bounds[0][0]),
 		this.scaleExtent = [this.scale, this.scale * 10];
 
+		this.setLevel(this.scale);
+
 		this.projection.scale(this.scaleExtent[0]);
 
 		this.path = d3.geo.path()
@@ -130,6 +132,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 			// if scaling changes, ignore translation (otherwise touch zooms are weird)
 			if (scale != this.lastScale) {
 				this.projection.scale(scale);
+				this.setLevel(scale);
 			} else {
 				var dx = t[0] - this.lastTranslation[0],
 				dy = t[1] - this.lastTranslation[1],
@@ -157,6 +160,24 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 			.attr('d', this.path);
 
 		this.plotPoints();
+	};
+
+	/**
+	 * Set the map level according to the specified zoom scale
+	 */
+	Map.prototype.setLevel = function(zoomScale) {
+		var level = 1;
+		if(zoomScale > 400) {
+			level = 3;
+		} else if(zoomScale > 200) {
+			level = 2;
+		}
+
+		$('#map-container')
+			.removeClass('level-1')
+			.removeClass('level-2')
+			.removeClass('level-3')
+			.addClass('level-' + level);
 	};
 
 	/**
@@ -212,7 +233,10 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				.append('circle')
 					.attr('r', 5)
 					.attr('class', function(d) {
-						return 'ping ping-' + d.code.replace(/\./g, '-');
+						return 'ping' +
+							' ping-' + d.code.replace(/\./g, '-') +
+							' ping-level-' + d.code.split('.').length +
+							' ' + d.class
 					});
 
 		this.plotPoints(arrayData);
@@ -238,6 +262,10 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 		// over things repeatedly).
 		var processedData = {};
 
+		// Object containing the most specific data type for each country, which is
+		// used to determine which data to show or hide at different zoom levels
+		var levelData = {};
+
 		var putData = function(code, type, date, data) {
 			if(processedData.hasOwnProperty(code)) {
 				// If the data for the current date already exists on the specified point,
@@ -250,6 +278,15 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				};
 
 				processedData[code]['data'][date] = data;
+			}
+
+			var country = code.split('.')[0];
+			if(!levelData.hasOwnProperty(country)) {
+				levelData[country] = [];
+			}
+
+			if(levelData[country][type] == null) {
+				levelData[country][type] = true;
 			}
 
 			if(typeof(data.cases) == 'number' && data.cases < minimums.cases) {
@@ -286,11 +323,11 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 										// Check what level data this is an properly
 										// put it into the processed data.
 										if(r == 'ZZ' && city.toLowerCase() == 'unknown') {
-											putData(c, 'country', d, point);
+											putData(c, 1, d, point);
 										} else if(r != 'ZZ' && city.toLowerCase() == 'unknown') {
-											putData([c, r].join('.'), 'subregion', d, point);
+											putData([c, r].join('.'), 2, d, point);
 										} else {
-											putData([c, r, city].join('.'), 'city', d, point);
+											putData([c, r, city].join('.'), 3, d, point);
 										}
 									}
 								}
@@ -310,9 +347,28 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 				var code = i.split('.');
 				var coordinates = locator.locate(code[0], code.length >= 2 ? code[1] : null, code.length == 3 ? code[2] : null);
 
+				var mostSpecificData = levelData[code[0]];
+				var c = [];
+				var inGap = false;
+
+				for(var l = 1; l < mostSpecificData.length; l++) {
+					if(mostSpecificData[l] === true) {
+						inGap = false;
+					}
+
+					if(l == processedData[i].type) {
+						inGap = true;
+					}					
+
+					if(!inGap) {
+						c.push('hide-level-' + l);
+					}
+				}
+
 				arrayData.push({
 					code: i,
 					type: processedData[i].type,
+					class: c.join(' '),
 					data: processedData[i].data,
 					coordinates: coordinates
 				});

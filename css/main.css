@@ -199,6 +199,22 @@ main.no-js>div {
 }
 
 /**
+ * Map Container Levels
+ */
+
+#map-container.level-1 .hide-level-1 {
+	opacity: 0;
+}
+
+#map-container.level-2 .hide-level-2 {
+	opacity: 0;
+}
+
+#map-container.level-3 .hide-level-3 {
+	opacity: 0;
+}
+
+/**
  * Timeline
  */
 
