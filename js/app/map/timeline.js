@@ -48,7 +48,7 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 	 * Add an event at the specified time with the specified name and data
 	 */
 	Timeline.prototype.addEvent = function(time, data) {
-		if(data.name.length > 12) {
+		if(data.name.length > 18) {
 			console.log('You may want to shorten the event name.');
 		}
 
