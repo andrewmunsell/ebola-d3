@@ -234,7 +234,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 					.attr('r', 5)
 					.attr('class', function(d) {
 						return 'ping' +
-							' ping-' + d.code.replace(/\./g, '-') +
+							' ping-' + d.code.replace(/\./g, '-').replace(/\s+/g, '-') +
 							' ping-level-' + d.code.split('.').length +
 							' ' + d.class
 					});
