@@ -413,6 +413,16 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', 'easing', '../data/Locat
 				}
 
 				return easing.easeOutQuart(p) * (maxPointSize - minPointSize) + minPointSize;
+			})
+			.attr('fill', function(d) {
+				var processedData = self._dataForCurrentTime.call(self, d);
+				if(processedData == null) {
+					return 'transparent';
+				}
+
+				var deathRate = processedData.deaths / processedData.cases;
+
+				return d3.hsl(55 - (deathRate * 55), 1, 0.5).toString();
 			});
 	};
 
