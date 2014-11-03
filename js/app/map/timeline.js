@@ -67,7 +67,8 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		this.calculateTimelineBounds();
 
 		var p = (this.currentDate.diff(this.start)) / (this.end.diff(this.start));
-		this.currentMarkerPosition = this.minimumCurrentMarkerPosition + p * (this.maximumCurrentMarkerPosition - this.minimumCurrentMarkerPosition);
+		this.currentMarkerPosition = this.minimumCurrentMarkerPosition + 
+			p * (this.maximumCurrentMarkerPosition - this.minimumCurrentMarkerPosition);
 
 		/**
 		 * Backdrop
