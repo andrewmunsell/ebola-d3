@@ -3,9 +3,13 @@
 define(['require', 'zepto', 'd3'], function(require, $, d3) {
 	require(['./map/map', './map/timeline'], function(Map, Timeline) {
 		/**
+		 * Configuration
+		 */
+		var summaryUrl = './data/summary.json';
+
+		/**
 		 * Map
 		 */
-		
 		var parent = $('#map-container');
 
 		var width = parent.width();
@@ -37,6 +41,29 @@ define(['require', 'zepto', 'd3'], function(require, $, d3) {
 		});
 
 		timeline.load();
+
+		/**
+		 * Summary statistics and last updated date
+		 */
+		d3.json(summaryUrl)
+			.get(function(err, json) {
+				if(!err) {
+					// Last updated dates
+					$('.last-updated').each(function() {
+						var format = 'MMMM Do, YYYY';
+
+						if($(this).attr('data-format')) {
+							format = $(this).attr('data-format');
+						}
+
+						$(this).text(moment(json.dateUpdated).format(format));
+					});
+
+					// Statistics
+					$('.total-cases').text(json.totalCases);
+					$('.total-deaths').text(json.totalDeaths);
+				}
+			});
 
 		d3.select(window)
 			.on('resize', function() {
