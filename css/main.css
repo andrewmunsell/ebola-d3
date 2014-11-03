@@ -28,6 +28,10 @@ html.js main.no-js {
 	display: none;
 }
 
+a {
+	color: #fff;
+}
+
 /**
  * Sidebar
  */
