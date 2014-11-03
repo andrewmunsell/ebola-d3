@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], function(require, $, moment, d3, topojson, Locator) {
+define(['require', 'zepto', 'moment', 'd3', 'topojson', 'easing', '../data/Locator'], function(require, $, moment, d3, topojson, easing, Locator) {
 	/**
 	 * Path to the TopoJSON file to use for the map
 	 * @type {String}
@@ -412,7 +412,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', '../data/Locator'], func
 					return 0;
 				}
 
-				return p * (maxPointSize - minPointSize) + minPointSize;
+				return easing.easeOutQuart(p) * (maxPointSize - minPointSize) + minPointSize;
 			});
 	};
 
