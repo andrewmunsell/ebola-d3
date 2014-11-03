@@ -170,15 +170,17 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 		setTimeout(function() {
 			try {
-				d3.select('.timeline-event-summary-value')
+				d3.selectAll('.timeline-event-summary-value')
 					.textwrap({
 						x: 0,
 						y: 4,
 						width: summaryWidth,
 						height: 400
 					});
-			} catch(e) { }
-		}, 0);
+			} catch(e) {
+				console.log('Problem reflowing event summary text:', e);
+			}
+		}, 250);
 
 		/**
 		 * Add actual marker
