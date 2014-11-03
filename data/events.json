@@ -1,0 +1,17 @@
+[
+	{
+		"date": "2014-03-25T00:00:00+0000",
+		"data": {
+			"name": "1st CDC Statement",
+			"description": "The CDC issues it's first announcement on the outbreak in Guinea."
+		}
+	},
+
+	{
+		"date": "2014-07-31T00:00:00+0000",
+		"data": {
+			"name": "Experimental Drug Used",
+			"description": "ZMapp, the experimental Ebola drug, is given to an American in Liberia that was helping patients."
+		}
+	}
+]

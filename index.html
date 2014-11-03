@@ -1,9 +1,92 @@
 <!doctype html>
-<html>
+<html class="no-js">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>Ebola</title>
+
+		<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet" type="text/css">
+		<link href="css/main.css" rel="stylesheet" type="text/css">
+
+		<script src="bower_components/modernizr/modernizr.js"></script>
+		<script src="bower_components/requirejs/require.js" data-main="js/app"></script>
 	</head>
 	<body>
-		
+		<aside>
+			<header>
+				<a class="back" href="https://www.andrewmunsell.com/">Back to my website</a>
+
+				<h1>Ebola</h1>
+				<h2>by Andrew Munsell</h2>
+			</header>
+
+			<section>
+				<p>
+					The Ebola virus has been an intense source of news and debate in recent months. Since the beginning of the 2014 outbreak in March when the CDC first issued it's statement on the disease in Guinea, Ebola has claimed over 4,500 lives and infected over 13,000.
+				</p>
+
+				<p>
+					The Ebola virus infects humans and other primates and is characterized by it's symptoms: fever, pain, vomiting, diarreah, and a decline in function of the liver and kidneys. The disease is spread through direct contact with the bodily fluids of the infected, and kills 25 to 90% of patients.
+				</p>
+
+				<p>
+					More information about Ebola can be found online, or <a href="http://amzn.to/1qmsq2a"><i>The Hot Zone</i></a> tells true story of the Ebola virus and other hemorrhagic fevers.
+				</p>
+			</section>
+
+			<section>
+				<div class="statistic">
+					<h3>Total cases <small>as of <span class="last-updated" data-format="MMM Do, YYYY">Unknown</span></small></h3>
+					<div class="statistic-value total-cases">
+						N/A
+					</div>
+				</div>
+
+				<div class="statistic">
+					<h3>Total deaths <small>as of <span class="last-updated" data-format="MMM Do, YYYY">Unknown</span></small></h3>
+					<div class="statistic-value total-deaths">
+						N/A
+					</div>
+				</div>
+			</section>
+
+			<footer>
+				<p>
+					Primary data source: <a href="https://github.com/cmrivers/ebola">Caitlin Rivers, Virginia Tech</a>
+				</p>
+
+				<p>
+					Summary statistics: <a href="http://www.cdc.gov/vhf/ebola/outbreaks/2014-west-africa/index.html">Centers for Disease Control and Prevention</a>
+				</p>
+
+				<p>
+					Data updated <strong class="last-updated">unknown</strong>
+				</p>
+
+				<p>
+					Copyright 2014 Andrew Munsell
+				</p>
+			</footer>
+		</aside>
+
+		<main class="require-js">
+			<div id="map-container">
+				<div class="map-shadow-bottom"></div>
+			</div>
+
+			<div id="timeline-container"></div>
+		</main>
+
+		<main class="no-js">
+			<div>
+				<h2>Your browser is not supported</h2>
+
+				<p>To view the visualization, you must have a browser with Javascript enabled and SVG support.</p>
+
+				<noscript>
+					<p>You currently do not have Javascript enabled.</p>
+				</noscript>
+			</div>
+		</main>
 	</body>
 </html>

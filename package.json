@@ -9,7 +9,7 @@
 	},
 
 	"author": "Andrew Munsell <andrew@wizardapps.net>",
-	"license": "MIT",
+	"license": "Proprietary",
 
 	"devDependencies": {
 		"grunt": "^0.4.5"
