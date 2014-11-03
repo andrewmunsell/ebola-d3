@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'zepto', 'moment', 'd3', 'topojson', 'easing', '../data/Locator'], function(require, $, moment, d3, topojson, easing, Locator) {
+define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', '../data/Locator'], function(require, $, _, moment, d3, topojson, easing, Locator) {
 	/**
 	 * Path to the TopoJSON file to use for the map
 	 * @type {String}
@@ -433,6 +433,16 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', 'easing', '../data/Locat
 	 *                    the datapoint at the current date.
 	 */
 	Map.prototype._dataForCurrentTime = function(d) {
+		return (_.memoize(this._dataForTime.bind(this)))(d, currentDate);
+	};
+
+	/**
+	 * Retrieve the data for the specified date
+	 * @param  {object} d    Data to pull date specific data for
+	 * @param  {moment} date Date to retrieve data for
+	 * @return {object}      New dataset with data set to the current date
+	 */
+	Map.prototype._dataForTime = function(d, date) {
 		var checkpoint = null;
 
 		var cases = 0;
@@ -442,7 +452,7 @@ define(['require', 'zepto', 'moment', 'd3', 'topojson', 'easing', '../data/Locat
 			if(d.data.hasOwnProperty(i)) {
 				var point = d.data[i];
 
-				if(currentDate.diff(moment(i)) >= 0) {
+				if(date.diff(moment(i)) >= 0) {
 					if(d.data[i].cases) {
 						cases = d.data[i].cases;
 					}
