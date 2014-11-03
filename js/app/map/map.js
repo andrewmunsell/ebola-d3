@@ -450,9 +450,13 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 
 		for(var i in d.data) {
 			if(d.data.hasOwnProperty(i)) {
+				if(d.data[i].moment == null) {
+					d.data[i].moment = moment(i);
+				}
+
 				var point = d.data[i];
 
-				if(date.diff(moment(i)) >= 0) {
+				if(date.diff(d.data[i].moment) >= 0) {
 					if(d.data[i].cases) {
 						cases = d.data[i].cases;
 					}
