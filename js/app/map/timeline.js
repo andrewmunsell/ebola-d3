@@ -170,7 +170,7 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 		setTimeout(function() {
 			try {
-				d3.selectAll('.timeline-event-summary-value')
+				d3.select('text.timeline-event-summary-value')
 					.textwrap({
 						x: 0,
 						y: 4,
