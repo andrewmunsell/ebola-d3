@@ -18,7 +18,7 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		this.calculateTimelineBounds();
 
 		this.start = moment('2014-03-01');
-		this.end = moment();
+		this.end = moment('2014-11-01');
 
 		this.currentDate = moment('2014-03-01');
 
