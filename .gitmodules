@@ -3,4 +3,4 @@
 	url = https://github.com/cmrivers/ebola
 [submodule "js/lib/d3textwrap"]
 	path = js/lib/d3textwrap
-	url = git@github.com:vijithassar/d3textwrap.git
+	url = https://github.com/vijithassar/d3textwrap
