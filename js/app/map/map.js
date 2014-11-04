@@ -199,8 +199,6 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 		var self = this;
 
 		d3.json(dataFile, function(error, world) {
-			$('main').addClass('loaded');
-
 			self.el.selectAll('path')
 				.data(topojson.feature(world, world.objects.countries).features)
 				.enter()
@@ -216,6 +214,7 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 			var collector = new Collector();
 			collector.collect(function(data) {
 				self.initPoints.call(self, data);
+				$('main').addClass('loaded');
 			});
 		});
 	};
