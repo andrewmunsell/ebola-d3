@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locator) {
+define(['require', 'deepmerge', 'nprogress', './Locator'], function(require, deepmerge, Nprogress, Locator) {
 	var collectors = [
 		'./collectors/CountryTimeseriesCollector',
 		'./collectors/USATimeseriesCollector',
@@ -40,6 +40,7 @@ define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locat
 	 */
 	var Collector = function() {
 		this.locator = new Locator();
+		this.progress = 0;
 	};
 
 	/**
@@ -55,10 +56,15 @@ define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locat
 			var results = [];
 			var currentResults = 0;
 
+			Nprogress.start();
+
 			var finishPiece = function(i) {
 				return function(result) {
 					results[i] = result;
 					currentResults++;
+
+					self.progress = currentResults / requiredResults;
+					Nprogress.set(self.progress);
 
 					if(currentResults == requiredResults) {
 						self.processCollectors.call(self, results, callback);
@@ -98,6 +104,8 @@ define(['require', 'deepmerge', './Locator'], function(require, deepmerge, Locat
 				}
 			}
 		}
+
+		Nprogress.done();
 
 		callback(data);
 	};
