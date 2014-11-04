@@ -420,7 +420,7 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 					return 'transparent';
 				}
 
-				var deathRate = processedData.deaths / processedData.cases;
+				var deathRate = Math.max(0, Math.min(1, processedData.deaths / processedData.cases));
 
 				return d3.hsl(55 - (deathRate * 55), 1, 0.5).toString();
 			});
