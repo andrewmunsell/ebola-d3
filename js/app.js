@@ -5,6 +5,7 @@ requirejs.config({
 
 	paths: {
 		q: '../bower_components/q/q',
+		nprogress: '../bower_components/nprogress/nprogress',
 		zepto: '../bower_components/zepto/zepto',
 		deepmerge: '../bower_components/deepmerge/index',
 		easing: '../bower_components/easing/easing',

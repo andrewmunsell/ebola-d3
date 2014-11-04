@@ -23,6 +23,7 @@
     "deepmerge": "~0.2.9",
     "eventEmitter": "Wolfy87/EventEmitter#~4.2.9",
     "easing": "*",
-    "requirejs": "~2.1.15"
+    "requirejs": "~2.1.15",
+    "nprogress": "~0.1.6"
   }
 }
