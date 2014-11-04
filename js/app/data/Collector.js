@@ -50,13 +50,13 @@ define(['require', 'deepmerge', 'nprogress', './Locator'], function(require, dee
 	Collector.prototype.collect = function(callback) {
 		var self = this;
 
+		Nprogress.start();
+
 		require(collectors, function() {
 			var requiredResults = arguments.length;
 
 			var results = [];
 			var currentResults = 0;
-
-			Nprogress.start();
 
 			var finishPiece = function(i) {
 				return function(result) {
