@@ -188,9 +188,7 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 						width: summaryWidth,
 						height: 400
 					});
-			} catch(e) {
-				console.log('Problem reflowing event summary text:', e);
-			}
+			} catch(e) { }
 		}, 250);
 
 		/**
