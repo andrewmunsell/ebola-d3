@@ -91,10 +91,21 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 			.attr('r', 8)
 			.attr('class', 'timeline-current-time');
 
+		this.drawDate();
+
 		/**
 		 * Event Markers
 		 */
 		 this.drawEventMarkers();
+	};
+
+	/**
+	 * Draw the current date marker
+	 */
+	Timeline.prototype.drawDate = function() {
+		this.currentDateMarker
+			.attr('x', this.currentMarkerPosition)
+			.attr('y', -24);
 	};
 
 	/**
@@ -211,6 +222,11 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 			.append('rect')
 				.attr('class', 'timeline-backdrop');
 
+		this.currentDateMarker = this.container
+			.append('text')
+				.attr('text-anchor', 'middle')
+				.attr('class', 'timeline-current-date-text');
+
 		this.eventContainer = this.container
 			.append('g')
 				.attr('class', 'timeline-events');
@@ -248,7 +264,7 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		var self = this;
 
 		return d3.behavior.drag()
-			.on("drag", function(d) {
+			.on('drag', function(d) {
 				var markerPosition = d3.event.x;
 				if(markerPosition < self.minimumCurrentMarkerPosition) {
 					markerPosition = self.minimumCurrentMarkerPosition;
@@ -261,7 +277,18 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 				self.setDate.call(self, moment(self.start).add(pDiff, 'milliseconds'));
 
+				self.currentDateMarker
+					.text(self.currentDate.format('MMM Do, YYYY'));
+
 				self.redraw.call(self);
+			})
+			.on('dragstart', function(d) {
+				self.currentDateMarker
+					.attr('class', 'timeline-current-date-text dragging');
+			})
+			.on('dragend', function(d) {
+				self.currentDateMarker
+					.attr('class', 'timeline-current-date-text');
 			});
 	};
 
