@@ -1,6 +1,6 @@
 'use strict';
 
-define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', '../data/Locator'], function(require, $, _, moment, d3, topojson, easing, Locator) {
+define(['require', 'zepto', 'underscore', 'moment', 'd3', 'd3tip', 'topojson', 'easing', '../data/Locator'], function(require, $, _, moment, d3, d3tip, topojson, easing, Locator) {
 	/**
 	 * Path to the TopoJSON file to use for the map
 	 * @type {String}
@@ -91,6 +91,19 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 
 		this.path = d3.geo.path()
 			.projection(this.projection);
+
+		// Setup the tooltips
+		var self = this;
+		this.tips = d3tip()
+			.attr('class', 'd3-tip')
+			.html(function(d) {
+				var processedData = self._dataForCurrentTime.call(self, d);
+
+				return '<div>'
+					+ '<div class="region-name">' + '</div>'
+					+ '<div class="cases-count">' + processedData.cases + ' cases</div>'
+					+ '<div class="deaths-count">' + processedData.deaths + ' deaths</div>';
+			});
 
 		this.el.call(this.setupZoom());
 	};
@@ -226,10 +239,15 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'topojson', 'easing', 
 	Map.prototype.initPoints = function(data) {
 		var arrayData = this.processPoints(data);
 
+		// Initialize the tooltips
+		this.el.call(this.tips);
+
 		this.el.selectAll('circle')
 			.data(arrayData)
 			.enter()
 				.append('circle')
+					.on('mouseover', this.tips.show)
+					.on('mouseout', this.tips.hide)
 					.attr('r', 5)
 					.attr('class', function(d) {
 						return 'ping' +
