@@ -102,7 +102,8 @@ define(['require', 'zepto', 'underscore', 'moment', 'd3', 'd3tip', 'topojson', '
 				return '<div>'
 					+ '<div class="region-name">' + '</div>'
 					+ '<div class="cases-count">' + processedData.cases + ' cases</div>'
-					+ '<div class="deaths-count">' + processedData.deaths + ' deaths</div>';
+					+ '<div class="deaths-count">' + processedData.deaths + ' deaths</div>'
+				+ '</div>';
 			});
 
 		this.el.call(this.setupZoom());
