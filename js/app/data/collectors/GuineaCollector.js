@@ -12,13 +12,28 @@ define(['require', 'd3'], function(require, d3) {
 	 * @type {Array}
 	 */
 	var dataFiles = [
-		'ebola_guinea_01Oct2014.csv',
-		'ebola_guinea_04Aug2014.csv',
-		'ebola_guinea_07Sep2014.csv',
-		'ebola_guinea_16Sept2014.csv',
-		'ebola_guinea_27Aug2014.csv',
-		'ebola_guinea_30Aug2014.csv',
-		'ebola_guinea_31Aug2014.csv'
+		'2014-08-04.csv',
+		'2014-08-26.csv',
+		'2014-08-27.csv',
+		'2014-08-30.csv',
+		'2014-08-31.csv',
+		'2014-09-02.csv',
+		'2014-09-04.csv',
+		'2014-09-07.csv',
+		'2014-09-08.csv',
+		'2014-09-09.csv',
+		'2014-09-11.csv',
+		'2014-09-14.csv',
+		'2014-09-16.csv',
+		'2014-09-17.csv',
+		'2014-09-19.csv',
+		'2014-09-21.csv',
+		'2014-09-22.csv',
+		'2014-09-23.csv',
+		'2014-09-24.csv',
+		'2014-09-26.csv',
+		'2014-09-30.csv',
+		'2014-10-01.csv'
 	];
 
 	/**
