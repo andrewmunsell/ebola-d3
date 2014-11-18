@@ -13,6 +13,7 @@ requirejs.config({
 		underscore: '../bower_components/underscore/underscore',
 		d3: '../bower_components/d3/d3',
 		d3textwrap: './lib/d3textwrap/d3textwrap.v0',
+		d3tip: './lib/d3-tip/index',
 		topojson: '../bower_components/topojson/topojson',
 		eventEmitter: '../bower_components/eventEmitter/EventEmitter'
 	},
@@ -27,6 +28,10 @@ requirejs.config({
 		},
 
 		d3textwrap: {
+			deps: ['d3']
+		},
+
+		d3tip: {
 			deps: ['d3']
 		}
 	}
