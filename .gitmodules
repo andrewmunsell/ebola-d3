@@ -4,3 +4,6 @@
 [submodule "js/lib/d3textwrap"]
 	path = js/lib/d3textwrap
 	url = https://github.com/vijithassar/d3textwrap
+[submodule "js/lib/d3-tip"]
+	path = js/lib/d3-tip
+	url = https://github.com/Caged/d3-tip
