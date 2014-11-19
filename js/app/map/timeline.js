@@ -15,10 +15,12 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		this.width = width;
 		this.height = height;
 
+		this.playIntervalId = null;
+
 		this.calculateTimelineBounds();
 
 		this.start = moment('2014-03-01');
-		this.end = moment('2014-11-01');
+		this.end = moment('2014-11-18');
 
 		this.currentDate = moment('2014-03-01');
 
@@ -39,6 +41,9 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		this.redraw();
 	};
 
+	/**
+	 * Calculate and set the beginning and ending timeline boundaries
+	 */
 	Timeline.prototype.calculateTimelineBounds = function() {
 		this.minimumCurrentMarkerPosition = this.width * 0.15 + this.height / 2;
 		this.maximumCurrentMarkerPosition = this.width - (this.width * 0.15 + this.height / 2);
@@ -73,7 +78,6 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		/**
 		 * Backdrop
 		 */
-
 		this.backdrop
 			.attr('x', this.width * 0.15)
 			.attr('y', 0)
@@ -91,12 +95,20 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 			.attr('r', 8)
 			.attr('class', 'timeline-current-time');
 
+		this.currentDateMarker
+			.text(this.currentDate.format('MMM Do, YYYY'));
+
 		this.drawDate();
 
 		/**
 		 * Event Markers
 		 */
 		 this.drawEventMarkers();
+
+		 /**
+		  * Draw the play/pause button
+		  */
+		 this.drawPlayPause();
 	};
 
 	/**
@@ -194,7 +206,6 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 		/**
 		 * Add actual marker
 		 */
-
 		eventMarker
 			.append('circle')
 				.attr('cx', 0)
@@ -211,9 +222,28 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 	};
 
 	/**
+	 * Draw the play/pause button
+	 */
+	Timeline.prototype.drawPlayPause = function() {
+		this.playButton
+			.attr('x', this.width * 0.15 - 8)
+			.attr('y', this.height / 2);
+
+		if(this.playIntervalId != null) {
+			this.playButton
+				.text('Pause');
+		} else {
+			this.playButton
+				.text('Play');
+		}
+	};
+
+	/**
 	 * Load the timeline
 	 */
 	Timeline.prototype.load = function() {
+		var self = this;
+
 		this.container = this.el.append('g');
 
 		this.backdrop = this.container
@@ -231,6 +261,14 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 		this.currentMarker = this.container
 			.append('circle');
+
+		this.playButton = this.container
+			.append('text')
+				.attr('class', 'play-pause')
+				.text('Play')
+				.on('click', function() {
+					self.togglePlay.call(self);
+				});
 
 		this.redraw();
 
@@ -275,9 +313,6 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 
 				self.setDate.call(self, moment(self.start).add(pDiff, 'milliseconds'));
 
-				self.currentDateMarker
-					.text(self.currentDate.format('MMM Do, YYYY'));
-
 				self.redraw.call(self);
 			})
 			.on('dragstart', function(d) {
@@ -288,6 +323,61 @@ define(['require', 'eventEmitter', 'd3', 'd3textwrap', 'zepto', 'moment'], funct
 				self.currentDateMarker
 					.attr('class', 'timeline-current-date-text');
 			});
+	};
+
+	/**
+	 * Toggle the play state
+	 */
+	Timeline.prototype.togglePlay = function() {
+		if(this.playIntervalId == null) {
+			this.play();
+		} else {
+			this.pause();
+		}
+	};
+
+	/**
+	 * Play the timeline animation
+	 */
+	Timeline.prototype.play = function() {
+		var self = this;
+
+		this.playIntervalId = setInterval(function() {
+			self._tick.call(self);
+		}, 1000);
+
+		this.redraw();
+	};
+
+	/**
+	 * Pause the auto-play animation
+	 */
+	Timeline.prototype.pause = function() {
+		this.currentDateMarker
+					.attr('class', 'timeline-current-date-text');
+
+		clearTimeout(this.playIntervalId);
+
+		this.playIntervalId = null;
+
+		this.redraw();
+	};
+
+	/**
+	 * Perform an animation tick forward in time
+	 */
+	Timeline.prototype._tick = function() {
+		var tomorrow = moment(this.currentDate).add(1, 'day');
+
+		if(tomorrow.isAfter(this.end)) {
+			this.pause();
+		} else {
+			this.currentDateMarker
+					.attr('class', 'timeline-current-date-text dragging');
+
+			this.setDate(tomorrow);
+			this.redraw();
+		}
 	};
 
 	/**

@@ -373,6 +373,20 @@ main.no-js>div {
 }
 
 /**
+ * Play/Pause Styles
+ */
+.play-pause {
+	padding: 4px 2px;
+
+	cursor: pointer;
+
+	fill: #fff;
+
+	text-anchor: end;
+	alignment-baseline: middle;
+}
+
+/**
  * Responsive Styles
  */
 
