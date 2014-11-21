@@ -9,7 +9,7 @@
 	},
 
 	"author": "Andrew Munsell <andrew@wizardapps.net>",
-	"license": "Proprietary",
+	"license": "GNU GPLv3",
 
 	"devDependencies": {
 		"grunt": "^0.4.5"
